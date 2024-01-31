@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>财务自由计算器</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>财务自由计算器</h1>
+        <form id="financeForm">
+            <!-- 基本信息 -->
+            <div class="input-group">
+                <label for="currentSavings">当前存款额度 (元):</label>
+                <input type="number" id="currentSavings" name="currentSavings" placeholder="请输入当前存款" min="0"><br><br>
+
+                <label for="interestRate">复利利率 (%):</label>
+                <input type="number" id="interestRate" name="interestRate" placeholder="请输入年利率" step="0.01" value="0"
+                    min="0" max="100"><br><br>
+
+                <label for="retirementYears">预计退休时间 (年):</label>
+                <input type="number" id="retirementYears" name="retirementYears" placeholder="请输入预计退休年数" value="1"
+                    min="1" max="100"><br><br>
+            </div>
+
+            <!-- 收入信息 -->
+            <div class="input-group">
+                <label for="incomeType">收入类型:</label>
+                <select id="incomeType" onchange="toggleIncomeInput()">
+                    <option value="annual">年收入</option>
+                    <option value="monthly">月收入</option>
+                </select><br><br>
+
+                <div id="annualIncomeInput">
+                    <label for="annualIncome">年收入 (元):</label>
+                    <input type="number" id="annualIncome" name="annualIncome" placeholder="请输入年收入" min="0"><br><br>
+                </div>
+
+                <div id="monthlyIncomeInput" style="display:none;">
+                    <label for="monthlyIncome">月收入 (元):</label>
+                    <input type="number" id="monthlyIncome" name="monthlyIncome" placeholder="请输入月收入" min="0"><br><br>
+                    <label for="totalMonths">包含奖金的总发放月份数:</label>
+                    <input type="number" id="totalMonths" name="totalMonths" placeholder="请输入总月份数" min="1"
+                        max="100"><br><br>
+                </div>
+            </div>
+
+            <!-- 税务信息 -->
+            <div class="input-group">
+                <label style="display: block;">
+                    <input type="checkbox" id="taxation" name="taxation" onchange="toggleTaxationInput()" style="margin-left: 5px;">是否计税
+                    <!-- <label for="taxation" style="margin-left: 30px;">是否计税:</label> -->
+                </label>
+
+                <div id="taxInputs" style="display:none;">
+                    <!-- 专项附加扣除 -->
+                    <label for="taxDeduction">专项附加扣除 (元/月):</label>
+                    <input type="number" id="taxDeduction" name="taxDeduction" placeholder="请输入专项附加扣除" min="0"><br><br>
+
+                    <!-- 公积金 -->
+                    <label for="housingFundBase">公积金基数 (元):</label>
+                    <input type="number" id="housingFundBase" name="housingFundBase" placeholder="请输入公积金基数"
+                        min="0"><br><br>
+                    <label for="housingFundRate">公积金比例 (%):</label>
+                    <input type="number" id="housingFundRate" name="housingFundRate" placeholder="请输入公积金比例" step="0.1"
+                        min="0" max="100"><br><br>
+
+                    <!-- 社保 -->
+                    <label for="socialSecurityBase">社保基数 (元):</label>
+                    <input type="number" id="socialSecurityBase" name="socialSecurityBase" placeholder="请输入社保基数"
+                        min="0"><br><br>
+                    <label for="socialSecurityRate">社保比例 (%):</label>
+                    <input type="number" id="socialSecurityRate" name="socialSecurityRate" placeholder="请输入社保比例"
+                        step="0.1" min="0" max="100"><br><br>
+                </div>
+            </div>
+
+            <!-- 支出信息 -->
+            <div class="input-group">
+                <label for="annualSpending">年使用金额 (元):</label>
+                <input type="number" id="annualSpending" name="annualSpending" placeholder="请输入年支出" value="0"
+                    min="0"><br><br>
+            </div>
+
+            <input type="button" value="计算" onclick="calculateFinances()">
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
