@@ -27,7 +27,7 @@
             <!-- 收入信息 -->
             <div class="input-group">
                 <label for="incomeType">收入类型:</label>
-                <select id="incomeType" onchange="toggleIncomeInput()">
+                <select id="incomeType">
                     <option value="annual">年收入</option>
                     <option value="monthly">月收入</option>
                 </select><br><br>
@@ -49,8 +49,7 @@
             <!-- 税务信息 -->
             <div class="input-group">
                 <label style="display: block;">
-                    <input type="checkbox" id="taxation" name="taxation" onchange="toggleTaxationInput()" style="margin-left: 5px;">是否计税
-                    <!-- <label for="taxation" style="margin-left: 30px;">是否计税:</label> -->
+                    <input type="checkbox" id="taxation" name="taxation" style="margin-left: 5px;">是否计税
                 </label>
 
                 <div id="taxInputs" style="display:none;">
@@ -83,11 +82,11 @@
                     min="0"><br><br>
             </div>
 
-            <input type="button" value="计算" onclick="calculateFinances()">
+            <button type="submit">计算</button>
         </form>
         <div id="result"></div>
     </div>
-    <script src="script.js"></script>
+    <script type="module" src="./src/presentation/main.js"></script>
 </body>
 
 </html>
