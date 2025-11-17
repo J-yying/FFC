@@ -15,6 +15,7 @@ export function createProjectionReport({
     interestEarned: entry.interestEarned,
     annualIncome: entry.annualIncome,
     annualSpending: entry.annualSpending,
+    inflationRate: entry.inflationRate,
     housingFund,
     socialSecurity,
     tax
@@ -22,11 +23,12 @@ export function createProjectionReport({
 
   const finalSavings = projection.length ? projection[projection.length - 1].endOfYear : 0;
   const retirementInterestIncome = finalSavings * interestRate;
-  const meetsFire = retirementInterestIncome >= annualSpending;
+  const latestSpending = projection.length ? projection[projection.length - 1].annualSpending : annualSpending;
+  const meetsFire = retirementInterestIncome >= latestSpending;
 
   const conclusion = {
     retirementInterestIncome,
-    annualSpending,
+    annualSpending: latestSpending,
     meetsFire
   };
 
@@ -35,4 +37,3 @@ export function createProjectionReport({
     conclusion
   };
 }
-
