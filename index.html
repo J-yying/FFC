@@ -1,248 +1,92 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>FIRE 财务自由助手</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>财务自由计算器</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-  <div class="app-shell" data-shell>
-    <header class="hero">
-      <p class="eyebrow">FIRE ASSISTANT</p>
-      <h1>财务自由起步指南</h1>
-      <p class="subtitle">按照“了解理念 → 功能导览 → 设定目标 → 模拟试算”的顺序完成初次体验。电脑或手机浏览器都能随时接力，不必重复填表。</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" data-action="jump-to-goal">设定 FIRE 目标</button>
-        <button class="btn btn-ghost" data-action="jump-to-tour">功能导览</button>
-      </div>
-      <nav class="step-nav">
-        <button type="button" data-nav-target="welcome">01 欢迎</button>
-        <button type="button" data-nav-target="concepts">02 理念</button>
-        <button type="button" data-nav-target="tour">03 导览</button>
-        <button type="button" data-nav-target="goal">04 目标</button>
-        <button type="button" data-nav-target="projection">05 试算</button>
-      </nav>
-    </header>
+    <div class="container">
+        <h1>财务自由计算器</h1>
+        <form id="financeForm">
+            <!-- 基本信息 -->
+            <div class="input-group">
+                <label for="currentSavings">当前存款额度 (元):</label>
+                <input type="number" id="currentSavings" name="currentSavings" placeholder="请输入当前存款" min="0"><br><br>
 
-    <main class="app-main">
-      <section class="view is-active" data-view="welcome" aria-live="polite">
-        <div class="panel">
-          <h2>01 · 欢迎加入</h2>
-          <p>从理解 FIRE 概念开始，系统会根据你的认知程度自动安排流程。选一个入口即可继续。</p>
-          <div class="choice-grid">
-            <button class="card" data-onboarding="newbie">
-              <strong>我是 FIRE 新手</strong>
-              <span>想快速认识概念与方法</span>
-            </button>
-            <button class="card" data-onboarding="expert">
-              <strong>我已了解 FIRE</strong>
-              <span>直接浏览功能并设定目标</span>
-            </button>
-          </div>
-        </div>
-      </section>
+                <label for="interestRate">复利利率 (%):</label>
+                <input type="number" id="interestRate" name="interestRate" placeholder="请输入年利率" step="0.01" value="0"
+                    min="0" max="100"><br><br>
 
-      <section class="view" data-view="concepts" aria-hidden="true">
-        <div class="panel">
-          <h2>02 · 核心理念速记</h2>
-          <div class="concept-grid">
-            <article>
-              <h3>4% 法则</h3>
-              <p>将年度必要支出 ×25 作为目标金额，退休后按 4% 提取，生活即可被利息覆盖。</p>
-            </article>
-            <article>
-              <h3>储蓄率</h3>
-              <p>储蓄率 = (税后收入 - 年支出) ÷ 税后收入。越高代表越快达到 FIRE，可通过记录必要/品质支出持续优化。</p>
-            </article>
-            <article>
-              <h3>资产盘点</h3>
-              <p>资产包含现金、投资、房产等，负债包括贷款、信用卡。掌握两者差值即可清楚当前净资产位置。</p>
-            </article>
-          </div>
-          <div class="panel-actions">
-            <button class="btn btn-secondary" data-action="concepts-prev">返回上一步</button>
-            <button class="btn btn-primary" data-action="concepts-next">我学会了，继续</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="view" data-view="tour" aria-hidden="true">
-        <div class="panel">
-          <h2>03 · 功能速览</h2>
-          <p class="muted">提前了解关键功能，准备好收入、支出与资产信息，体验会更顺畅。</p>
-          <div class="tour-grid">
-            <article class="tour-card">
-              <h3>支出填报与分析</h3>
-              <p>记录必要与品质支出，系统会给出降低开支的提示并计算储蓄率。</p>
-            </article>
-            <article class="tour-card">
-              <h3>收入填报与分析</h3>
-              <p>统一管理主动收入与被动收入，识别收入多元化程度与波动。</p>
-            </article>
-            <article class="tour-card">
-              <h3>资产填报与分析</h3>
-              <p>聚合现金、股票、基金、房产和贷款，实时查看净资产变化。</p>
-            </article>
-            <article class="tour-card">
-              <h3>FIRE 进度</h3>
-              <p>以进度条呈现目标完成度，并对关键比率（储蓄率、投资回报）发出提醒。</p>
-            </article>
-            <article class="tour-card">
-              <h3>FIRE 模拟试算</h3>
-              <p>改变收益率或支出策略，几秒钟内看到目标达成年份的变化。</p>
-            </article>
-          </div>
-          <div class="panel-actions">
-            <button class="btn btn-secondary" data-action="tour-skip">稍后再看</button>
-            <button class="btn btn-primary" data-action="tour-complete">准备好了，去设定目标</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="view" data-view="goal" aria-hidden="true">
-        <div class="goal-grid" data-goal-root>
-          <div class="goal-panels">
-            <div class="panel goal-panel" data-goal-panel="calculator">
-            <h2>04 · FIRE 目标估算</h2>
-            <p class="muted">根据 4% 法则，目标金额 = 必要年支出 × 25。可随时切换按月或按年填写。</p>
-            <div class="goal-frequency">
-              <label><input type="radio" name="goalFrequency" value="monthly" checked data-goal-frequency>按月输入</label>
-              <label><input type="radio" name="goalFrequency" value="annual" data-goal-frequency>按年输入</label>
-            </div>
-            <label class="field">
-              <span>必要支出</span>
-              <input type="number" min="0" step="100" value="5000" data-goal-amount placeholder="请输入金额">
-            </label>
-            <p class="muted" data-goal-hint>按月 5,000 元 ≈ 年度 60,000 元</p>
-            <div class="goal-output">
-              <span>估算目标金额</span>
-              <strong data-goal-output>￥1,500,000</strong>
-            </div>
-            <button type="button" class="link-button" data-goal-switch="to-direct">我已有结论，直接输入</button>
+                <label for="retirementYears">预计退休时间 (年):</label>
+                <input type="number" id="retirementYears" name="retirementYears" placeholder="请输入预计退休年数" value="1"
+                    min="1" max="100"><br><br>
             </div>
 
-            <div class="panel goal-panel is-hidden" data-goal-panel="direct">
-            <h2>04 · 我自己输入 FIRE 目标</h2>
-            <p class="muted">如果你已经计算过 FIRE 目标，可直接输入最终结果。</p>
-            <label class="field">
-              <span>目标总金额</span>
-              <input type="number" min="0" step="1000" data-goal-direct placeholder="例如 1500000">
-            </label>
-            <button type="button" class="link-button" data-goal-switch="to-calculator">返回使用向导</button>
-            </div>
-          </div>
-
-          <aside class="panel goal-preview" data-goal-preview>
-            <h3>目标概览</h3>
-            <p>实时计算安全提取额，并提示建议储蓄率。</p>
-            <dl>
-              <dt>目标金额</dt>
-              <dd data-preview="target">￥1,500,000</dd>
-              <dt>安全提取 (4%)</dt>
-              <dd data-preview="withdraw">￥60,000 / 年</dd>
-              <dt>建议储蓄率</dt>
-              <dd data-preview="confidence">待输入</dd>
-            </dl>
-            <p class="muted">完成后继续填写财务画像，即可得到详细的 FIRE 试算表。</p>
-          </aside>
-
-          <div class="goal-cta">
-            <button type="button" class="btn btn-primary" data-goal-confirm>确认 FIRE 目标</button>
-            <p class="status" data-goal-status></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="view" data-view="projection" aria-hidden="true">
-          <div class="panel">
-            <div class="panel-head">
-              <div>
-                <h2>05 · FIRE 模拟试算</h2>
-                <p class="muted">结合当前资产、收入、支出与利率，生成逐年储蓄变化和退休时的利息收入。</p>
-              </div>
-              <button class="btn btn-ghost" data-action="reset-journey">重新体验引导</button>
-            </div>
-            <div class="responsive-grid">
-              <form id="financeForm" data-capture="finance">
-              <div class="input-group">
-                <label for="currentSavings">当前存款额度 (元)</label>
-                <input type="number" id="currentSavings" name="currentSavings" placeholder="请输入当前存款" min="0">
-
-                <label for="interestRate">复利利率 (%)</label>
-                <input type="number" id="interestRate" name="interestRate" placeholder="请输入年利率" step="0.01" value="4" min="0" max="100">
-
-                <label for="inflationRate">通货膨胀率 (CPI %)</label>
-                <input type="number" id="inflationRate" name="inflationRate" placeholder="例如 2" step="0.1" value="2" min="0" max="100">
-
-                <label for="retirementYears">预计退休时间 (年)</label>
-                <input type="number" id="retirementYears" name="retirementYears" placeholder="请输入预计退休年数" value="30" min="1" max="100">
-              </div>
-
-              <div class="input-group">
-                <label for="incomeType">收入类型</label>
-                <select id="incomeType" name="incomeType">
-                  <option value="annual">年收入</option>
-                  <option value="monthly">月收入</option>
-                </select>
+            <!-- 收入信息 -->
+            <div class="input-group">
+                <label for="incomeType">收入类型:</label>
+                <select id="incomeType">
+                    <option value="annual">年收入</option>
+                    <option value="monthly">月收入</option>
+                </select><br><br>
 
                 <div id="annualIncomeInput">
-                  <label for="annualIncome">年收入 (元)</label>
-                  <input type="number" id="annualIncome" name="annualIncome" placeholder="请输入年收入" min="0">
+                    <label for="annualIncome">年收入 (元):</label>
+                    <input type="number" id="annualIncome" name="annualIncome" placeholder="请输入年收入" min="0"><br><br>
                 </div>
 
-                <div id="monthlyIncomeInput" class="stack" hidden>
-                  <label for="monthlyIncome">月收入 (元)</label>
-                  <input type="number" id="monthlyIncome" name="monthlyIncome" placeholder="请输入月收入" min="0">
-                  <label for="totalMonths">包含奖金的总发放月份</label>
-                  <input type="number" id="totalMonths" name="totalMonths" placeholder="请输入总月份数" min="1" max="24">
+                <div id="monthlyIncomeInput" style="display:none;">
+                    <label for="monthlyIncome">月收入 (元):</label>
+                    <input type="number" id="monthlyIncome" name="monthlyIncome" placeholder="请输入月收入" min="0"><br><br>
+                    <label for="totalMonths">包含奖金的总发放月份数:</label>
+                    <input type="number" id="totalMonths" name="totalMonths" placeholder="请输入总月份数" min="1"
+                        max="100"><br><br>
                 </div>
-              </div>
+            </div>
 
-              <div class="input-group">
-                <label class="checkbox">
-                  <input type="checkbox" id="taxation" name="taxation">是否计税
+            <!-- 税务信息 -->
+            <div class="input-group">
+                <label style="display: block;">
+                    <input type="checkbox" id="taxation" name="taxation" style="margin-left: 5px;">是否计税
                 </label>
-                <div id="taxInputs" class="stack" hidden>
-                  <div class="field">
-                    <label for="taxDeduction">专项附加扣除 (元/月)</label>
-                    <input type="number" id="taxDeduction" name="taxDeduction" min="0">
-                  </div>
-                  <div class="field">
-                    <label for="housingFundBase">公积金基数 (元)</label>
-                    <input type="number" id="housingFundBase" name="housingFundBase" min="0">
-                  </div>
-                  <div class="field">
-                    <label for="housingFundRate">公积金比例 (%)</label>
-                    <input type="number" id="housingFundRate" name="housingFundRate" step="0.1" min="0" max="100">
-                  </div>
-                  <div class="field">
-                    <label for="socialSecurityBase">社保基数 (元)</label>
-                    <input type="number" id="socialSecurityBase" name="socialSecurityBase" min="0">
-                  </div>
-                  <div class="field">
-                    <label for="socialSecurityRate">社保比例 (%)</label>
-                    <input type="number" id="socialSecurityRate" name="socialSecurityRate" step="0.1" min="0" max="100">
-                  </div>
+
+                <div id="taxInputs" style="display:none;">
+                    <!-- 专项附加扣除 -->
+                    <label for="taxDeduction">专项附加扣除 (元/月):</label>
+                    <input type="number" id="taxDeduction" name="taxDeduction" placeholder="请输入专项附加扣除" min="0"><br><br>
+
+                    <!-- 公积金 -->
+                    <label for="housingFundBase">公积金基数 (元):</label>
+                    <input type="number" id="housingFundBase" name="housingFundBase" placeholder="请输入公积金基数"
+                        min="0"><br><br>
+                    <label for="housingFundRate">公积金比例 (%):</label>
+                    <input type="number" id="housingFundRate" name="housingFundRate" placeholder="请输入公积金比例" step="0.1"
+                        min="0" max="100"><br><br>
+
+                    <!-- 社保 -->
+                    <label for="socialSecurityBase">社保基数 (元):</label>
+                    <input type="number" id="socialSecurityBase" name="socialSecurityBase" placeholder="请输入社保基数"
+                        min="0"><br><br>
+                    <label for="socialSecurityRate">社保比例 (%):</label>
+                    <input type="number" id="socialSecurityRate" name="socialSecurityRate" placeholder="请输入社保比例"
+                        step="0.1" min="0" max="100"><br><br>
                 </div>
-              </div>
+            </div>
 
-              <div class="input-group">
-                <label for="annualSpending">年使用金额 (元)</label>
-                <input type="number" id="annualSpending" name="annualSpending" placeholder="请输入年支出" value="60000" min="0">
-              </div>
+            <!-- 支出信息 -->
+            <div class="input-group">
+                <label for="annualSpending">年使用金额 (元):</label>
+                <input type="number" id="annualSpending" name="annualSpending" placeholder="请输入年支出" value="0"
+                    min="0"><br><br>
+            </div>
 
-              <button type="submit" class="btn btn-primary">生成试算结果</button>
-            </form>
-            <div id="result" class="result"></div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-  <script type="module" src="./src/presentation/main.js"></script>
+            <button type="submit">计算</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script type="module" src="./src/presentation/main.js"></script>
 </body>
 
 </html>

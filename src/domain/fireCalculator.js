@@ -5,18 +5,15 @@ export class FireCalculator {
     retirementYears = 0,
     annualIncome = 0,
     annualSpending = 0,
-    inflationRate = 0,
     startYear = new Date().getFullYear()
   }) {
     const projection = [];
     let futureSavings = currentSavings;
-    let spending = annualSpending;
 
     for (let i = 0; i < retirementYears; i += 1) {
       const startOfYear = futureSavings;
-      const currentSpending = spending;
-      futureSavings += futureSavings * interestRate + annualIncome - currentSpending;
-      const interestEarned = futureSavings - startOfYear - annualIncome + currentSpending;
+      futureSavings += futureSavings * interestRate + annualIncome - annualSpending;
+      const interestEarned = futureSavings - startOfYear - annualIncome + annualSpending;
 
       projection.push({
         year: startYear + i,
@@ -24,11 +21,8 @@ export class FireCalculator {
         endOfYear: futureSavings,
         interestEarned,
         annualIncome,
-        annualSpending: currentSpending,
-        inflationRate
+        annualSpending
       });
-
-      spending *= 1 + inflationRate;
     }
 
     return {
@@ -41,3 +35,4 @@ export class FireCalculator {
     return finalSavings * interestRate;
   }
 }
+
