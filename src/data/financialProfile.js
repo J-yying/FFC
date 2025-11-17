@@ -28,6 +28,7 @@ export function buildFinancialProfile(rawInputs) {
   return {
     currentSavings: toNumber(rawInputs.currentSavings),
     interestRate: toNumber(rawInputs.interestRate),
+    inflationRate: toNumber(rawInputs.inflationRate),
     retirementYears: Math.max(0, Math.floor(toNumber(rawInputs.retirementYears))),
     annualSpending: toNumber(rawInputs.annualSpending),
     annualIncome: breakdown.netAnnualIncome,
@@ -39,4 +40,3 @@ export function buildFinancialProfile(rawInputs) {
     baseAnnualIncome
   };
 }
-
