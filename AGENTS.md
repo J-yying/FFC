@@ -438,6 +438,6 @@ JavaScript 采用 2 空格缩进、命名导出与 `const` 优先策略；函数
 ### 阶段一交付现状（Web/H5 共用）
 - **Onboarding / 导览体验**：`index.html` + `src/agents/onboardingNarratorAgent.js` 已落地“欢迎 → 理念 → 功能速览”三段式 UI，Hero 区加入 01-05 步骤导航，Atlas Coordinator 负责视图切换并输出 `onboarding:path` 事件，可直接接入埋点。
 - **FIRE 目标估算**：`goalCalculatorAgent` 支持月/年向导与直接输入，并通过 `goal:preview`／`goal:spending` 事件将目标金额与年度支出回填到试算表单。目标概览卡片放在中列，CTA 固定在 `.goal-cta`（最右列）中，满足“概览居中、按钮置右”的 UX 诉求。
-- **模拟试算**：`FireCalculator`、`financialProfile`、`createProjectionReport`、`renderers` 已引入通货膨胀率（CPI）参数，支出按年度复利增长，报表新增“含CPI支出”和“通胀率”列，结论区提示“预计年支出（含通胀）”。填写区域与结果表按 0.85/1.15 比例布局，表格可显示更多列。
+- **模拟试算**：`FireCalculator`、`financialProfile`、`createProjectionReport`、`renderers` 已引入通货膨胀率（CPI）参数，每年都会按“期初存款 × CPI”扣减购买力并在表格中展示“CPI 扣减”列；同时保留年使用金额列方便比对。填写区域与结果表按 0.85/1.15 比例布局，表格可显示更多列。
 - **响应式与数据同步**：`styles.css` 切换为浅蓝主题，`goal-grid` 采用三列栅格（估算面板/概览/CTA），H5 Shell Agent 根据 viewport 切换 `app-shell.is-mobile`。Flow Mirror Agent 将旅程状态写入 `sessionStorage`，H5 Capture Agent 提供离线草稿，确保 PC/H5 双端衔接。
 - **后续建议**：Atlas 可记录 CPI、目标金额等关键信号（`timeline`），留作多 Agent 决策依据；实现真实 `POST /api/v1/user/fire-goal` 后，Web Data Steward 需换成实际 API 调用并扩展冲突提示；当阶段二启动时，可新增 Asset Intake Agent，与 Flow Mirror 协同同步资产草稿。

@@ -16,6 +16,7 @@ export function createProjectionReport({
     annualIncome: entry.annualIncome,
     annualSpending: entry.annualSpending,
     inflationRate: entry.inflationRate,
+    inflationCost: entry.inflationCost,
     housingFund,
     socialSecurity,
     tax
